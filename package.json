@@ -2,18 +2,33 @@
   "name": "humanizer.node",
   "version": "1.0.0",
   "description": "Humanizer meets all your Node needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantitie",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rimraf irf dist/* && tsc",
+    "test": "npm run build && mocha"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fakoua/humanizer.node.git"
   },
-  "author": "Sameh Fakoua",
+  "author": {
+    "name": "Sameh Fakoua",
+    "email": "s.fakoua@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/fakoua/humanizer.node/issues"
   },
-  "homepage": "https://github.com/fakoua/humanizer.node#readme"
+  "homepage": "https://github.com/fakoua/humanizer.node#readme",
+  "devDependencies": {
+    "@types/chai": "^4.2.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^13.1.4",
+    "chai": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.4"
+  }
 }

@@ -1,5 +1,5 @@
 // @ts-ignor
-import * as ord from './src/Humanizer/Inflections/Ordinalize.ts'
+import * as ord from './src/Humanizer/Inflections/Ordinalize'
 
 declare global {
     interface Number {

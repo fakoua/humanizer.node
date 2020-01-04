@@ -1,5 +1,5 @@
 // @ts-ignore
-import { EnglishNumberToWordsConverter } from './src/Humanizer/Localisation/NumberToWords/EnglishNumberToWordsConverter.ts'
+import { EnglishNumberToWordsConverter } from './src/Humanizer/Localisation/NumberToWords/EnglishNumberToWordsConverter'
 
 declare global {
     interface Number {

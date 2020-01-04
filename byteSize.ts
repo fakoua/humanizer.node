@@ -1,5 +1,5 @@
 // @ts-ignore
-import { ByteSize } from './src/Humanizer/Bytes/ByteSize.ts'
+import { ByteSize } from './src/Humanizer/Bytes/ByteSize'
 
 declare global {
     interface Number {

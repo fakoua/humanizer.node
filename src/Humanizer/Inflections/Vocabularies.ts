@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Vocabulary } from "./Vocabulary.ts";
+import { Vocabulary } from "./Vocabulary";
 
     /// <summary>
     /// Container for registered Vocabularies.  At present, only a single vocabulary is supported: Default.
