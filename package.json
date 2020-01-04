@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf irf dist/* && tsc",
-    "test": "npm run build && mocha"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
