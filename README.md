@@ -1,6 +1,10 @@
-# Humanizer.ts
+# Humanizer.node
 
 Humanizer meets all your TypeScript needs for manipulating and displaying strings, dates, times, timespans, numbers and quantities.
+
+```bash
+npm i humanizer.node
+```
 
 ## Implemented
 
