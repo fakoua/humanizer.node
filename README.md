@@ -1,6 +1,6 @@
 # Humanizer.node
 
-Humanizer meets all your TypeScript needs for manipulating and displaying strings, dates, times, timespans, numbers and quantities.
+Humanizer meets all your NodeJs needs for manipulating and displaying strings, dates, times, timespans, numbers and quantities.
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/fakoua/humanizer.node/Node_CI) ![npm](https://img.shields.io/npm/v/humanizer.node) ![GitHub top language](https://img.shields.io/github/languages/top/fakoua/humanizer.node) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/humanizer.node) ![GitHub](https://img.shields.io/github/license/fakoua/humanizer.node)
 
