@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Vocabulary = void 0;
 /// <summary>
 /// A container for exceptions to simple pluralization/singularization rules.
 /// Vocabularies.Default contains an extensive list of rules for US English.
@@ -59,7 +60,7 @@ class Vocabulary {
     pluralize(word, inputIsKnownToBeSingular = true) {
         var result = this.applyRules(this._plurals, word, false);
         if (inputIsKnownToBeSingular) {
-            return (result !== null && result !== void 0 ? result : word);
+            return result !== null && result !== void 0 ? result : word;
         }
         var asSingular = this.applyRules(this._singulars, word, false);
         var asSingularAsPlural = this.applyRules(this._plurals, asSingular, false);
@@ -78,7 +79,7 @@ class Vocabulary {
     singularize(word, inputIsKnownToBePlural = true, skipSimpleWords = false) {
         var result = this.applyRules(this._singulars, word, skipSimpleWords);
         if (inputIsKnownToBePlural) {
-            return (result !== null && result !== void 0 ? result : word);
+            return result !== null && result !== void 0 ? result : word;
         }
         // the Plurality is unknown so we should check all possibilities
         var asPlural = this.applyRules(this._plurals, word, false);
@@ -86,7 +87,7 @@ class Vocabulary {
         if (asPlural != word && word + "s" != asPlural && asPluralAsSingular == word && result != word) {
             return word;
         }
-        return (result !== null && result !== void 0 ? result : word);
+        return result !== null && result !== void 0 ? result : word;
     }
     applyRules(rules, word, skipFirstRule) {
         if (word == null) {

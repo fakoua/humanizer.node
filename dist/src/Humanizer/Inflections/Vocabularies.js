@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Vocabularies = void 0;
 // @ts-ignore
 const Vocabulary_1 = require("./Vocabulary");
 /// <summary>

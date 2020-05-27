@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ShowQuantityAs = void 0;
 // @ts-ignore
 const Vocabularies_1 = require("./src/Humanizer/Inflections/Vocabularies");
 require("./numberToWords");
