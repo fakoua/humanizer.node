@@ -13,7 +13,7 @@ declare global {
  * (3501).toWords() -> "three thousand five hundred and one"
  */
 Number.prototype.toWords = function (): string {
-   return EnglishNumberToWordsConverter.convert(this)
+   return EnglishNumberToWordsConverter.convert(this as number)
 }
 
 /**
@@ -21,6 +21,6 @@ Number.prototype.toWords = function (): string {
  * (1).toOrdinalWords() -> "first"
  */
 Number.prototype.toOrdinalWords = function (): string {
-    return EnglishNumberToWordsConverter.convert(this, true)
+    return EnglishNumberToWordsConverter.convert(this as number, true)
 }
 

@@ -12,9 +12,9 @@ declare global {
 }
 
 Number.prototype.ordinalize = function (): string {
-    return ord.convert(this, this.toString())
+    return ord.convert(this as number, this.toString())
 }
 
 String.prototype.ordinalize = function (): string {
-    return ord.convert(Number(this), this)
+    return ord.convert(Number(this), this as string)
 }

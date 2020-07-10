@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Vocabularies = void 0;
 // @ts-ignore
 const Vocabulary_1 = require("./Vocabulary");
 /// <summary>
@@ -19,7 +18,7 @@ class Vocabularies {
         return Vocabularies.Instance;
     }
     static BuildDefault() {
-        var _default = new Vocabulary_1.Vocabulary();
+        const _default = new Vocabulary_1.Vocabulary();
         _default.addPlural("$", "s");
         _default.addPlural("s$", "s");
         _default.addPlural("(ax|test)is$", "$1es");
@@ -81,7 +80,7 @@ class Vocabularies {
         _default.addIrregular("database", "databases");
         _default.addIrregular("zombie", "zombies");
         _default.addIrregular("personnel", "personnel");
-        //Fix #78a
+        // Fix #78a
         _default.addIrregular("cache", "caches");
         _default.addIrregular("is", "are", false);
         _default.addIrregular("that", "those", false);

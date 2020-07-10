@@ -1,12 +1,13 @@
 {
   "name": "humanizer.node",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Humanizer meets all your Node needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantitie",
   "main": "dist/index.js",
   "runkitExampleFilename": "runkit.js",
   "scripts": {
     "build": "rimraf irf dist/* && tsc",
-    "test": "mocha"
+    "test": "mocha",
+    "local": "npm run build && node ./local_test.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,6 @@
     "mocha": "^7.2.0",
     "nyc": "^15.0.1",
     "ts-node": "^8.10.1",
-    "typescript": "^3.7.4"
+    "typescript": "3.7.4"
   }
 }

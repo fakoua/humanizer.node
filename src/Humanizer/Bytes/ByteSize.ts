@@ -170,8 +170,8 @@ export class ByteSize {
     /// the largest metric prefix such that the corresponding value is greater
     ///  than or equal to one.
     /// </summary>
-    public toString(): string {
-        return this.largestWholeNumberValue() + " " + this.largestWholeNumberSymbol();
+    public toString(fixePoint: number = 2): string {
+        return this.largestWholeNumberValue().toFixed(fixePoint) + " " + this.largestWholeNumberSymbol();
     }
 
 
@@ -182,7 +182,7 @@ export class ByteSize {
     /// value is greater than or equal to one.
     /// </summary>
     public toFullWords(): string {
-        var byteSizeAsFullWords = this.toString()
+        const byteSizeAsFullWords = this.toString()
 
         // If there is more than one unit, make the word plural
         return this.largestWholeNumberValue() > 1 ? byteSizeAsFullWords + "s" : byteSizeAsFullWords;
@@ -252,42 +252,40 @@ export class ByteSize {
 
         // Acquiring culture specific decimal separator
 
-        let decSep = "." //Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+        const decSep = "." // Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 
         // Pick first non-digit number
         for (num = 0; num < s.length; num++) {
-            if (!(!isNaN(Number(s[num])) || s[num] == decSep)) {
+            if (!(!isNaN(Number(s[num])) || s[num] === decSep)) {
                 found = true;
                 break;
             }
         }
 
-        if (found == false) {
-            return new ByteSize(1); //TODO: should raize error
+        if (found === false) {
+            return new ByteSize(1); // TODO: should raize error
         }
 
-        let lastNumber = num;
+        const lastNumber = num;
         // Cut the input string in half
-        var numberPart = s.substring(0, lastNumber).trim()
-        var sizePart = s.substring(lastNumber, s.length).trim()
+        const numberPart = s.substring(0, lastNumber).trim()
+        const sizePart = s.substring(lastNumber, s.length).trim()
         // Get the numeric part
         if (isNaN(Number(numberPart))) {
-            return new ByteSize(2); //TODO: should raize error
+            return new ByteSize(2); // TODO: should raize error
         }
 
-        let nb = Number(numberPart)
+        const nb = Number(numberPart)
         // Get the magnitude part
         switch (sizePart.toUpperCase()) {
             case ByteSize.ByteSymbol:
-                if (sizePart == ByteSize.BitSymbol) { // Bits
-                    if (nb % 1 != 0) // Can't have partial bits
-                    {
-                        return new ByteSize(3); //TODO: should raize error
+                if (sizePart === ByteSize.BitSymbol) { // Bits
+                    if (nb % 1 !== 0) {
+                        return new ByteSize(3); // TODO: should raize error
                     }
 
                     result = ByteSize.fromBits(nb);
-                }
-                else { // Bytes
+                } else { // Bytes
                     result = ByteSize.fromBytes(nb);
                 }
                 break;

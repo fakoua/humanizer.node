@@ -10,11 +10,11 @@ declare global {
 }
 
 String.prototype.pluralize = function (): string {
-    return Vocabularies.Default().pluralize(this)
+    return Vocabularies.Default().pluralize(this as string)
 }
 
 String.prototype.singularize = function (): string {
-    return Vocabularies.Default().singularize(this)
+    return Vocabularies.Default().singularize(this as string)
 }
 
 

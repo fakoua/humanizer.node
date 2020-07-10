@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convert = void 0;
 exports.convert = function (nb, nbString) {
-    let nMod100 = nb % 100;
+    const nMod100 = nb % 100;
     if (nMod100 >= 11 && nMod100 <= 13) {
         return nbString + "th";
     }

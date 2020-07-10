@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// @ts-ignore
 const ByteSize_1 = require("./src/Humanizer/Bytes/ByteSize");
 Number.prototype.bits = function () {
     return ByteSize_1.ByteSize.fromBits(this);

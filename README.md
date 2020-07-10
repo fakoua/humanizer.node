@@ -7,6 +7,23 @@ Humanizer meets all your NodeJs needs for manipulating and displaying strings, d
 ```bash
 npm i humanizer.node
 ```
+### Table of contents
+
+- [Humanizer.node](#humanizernode)
+    - [Table of contents](#table-of-contents)
+  - [Implemented](#implemented)
+  - [Usage](#usage)
+  - [Examples](#examples)
+  - [ByteSize](#bytesize)
+  - [Vocabularies](#vocabularies)
+    - [Pluralize](#pluralize)
+    - [Singularize](#singularize)
+  - [Ordinalize](#ordinalize)
+  - [ToQuantity](#toquantity)
+  - [Number to words](#number-to-words)
+  - [Number to ordinal words](#number-to-ordinal-words)
+  - [Roman Numerals](#roman-numerals)
+  - [Metric numerals](#metric-numerals)
 
 ## Implemented
 
@@ -21,12 +38,7 @@ npm i humanizer.node
 Import the Extensions:
 
 ```js
-require('humanizer.node').toQuantity
-require('humanizer.node').numberToWords
-require('humanizer.node').byteSize
-require('humanizer.node').vocabularies
-require('humanizer.node').romanNumeral
-require('humanizer.node').ordinalize
+require('humanizer.node')
 ```
 
 ## Examples
@@ -35,7 +47,7 @@ require('humanizer.node').ordinalize
 //Your imports here
 
 let result = (10).megabytes().toString()
-console.log(result) // -> 10 MB
+console.log(result) // -> 10.00 MB
 ```
 
 ## ByteSize
@@ -45,7 +57,7 @@ Quite a few changes and additions are made on `ByteSize` to make the interaction
 Here is a few examples of how you can convert from numbers to byte sizes and between size magnitudes:
 
 ```js
-require('humanizer.node').byteSize
+require('humanizer.node')
 
 let fileSize = (10).kilobytes()
 console.log(fileSize.bits)          // -> 81920
@@ -81,7 +93,7 @@ console.log(f.toString()) // -> 5.020549774169922 GB
 `Pluralize` pluralizes the provided input while taking irregular and uncountable words into consideration:
 
 ```js
-require('humanizer.node').vocabularies
+require('humanizer.node')
 
 "Man".pluralize()       // -> Men
 "string".pluralize()    // -> "strings"
@@ -100,7 +112,7 @@ require('humanizer.node').vocabularies
 ## Ordinalize
 
 ```js
-require('humanizer.node').ordinalize
+require('humanizer.node')
 
 (1).ordinalize() => "1st"
 (5).ordinalize() => "5th"
@@ -109,7 +121,7 @@ require('humanizer.node').ordinalize
 ## ToQuantity
 
 ```js
-require('humanizer.node').toQuantity
+require('humanizer.node')
 
 "case".toQuantity(0) => "0 cases"
 "case".toQuantity(1) => "1 case"
@@ -141,7 +153,7 @@ You can also pass a second argument, `ShowQuantityAs`, to `toQuantity` to specif
 Humanizer can change numbers to words using the `toWords` extension:
 
 ```js
-require('humanizer.node').numberToWords
+require('humanizer.node')
 
 (1).toWords() => "one"
 (10).toWords() => "ten"
@@ -153,7 +165,7 @@ require('humanizer.node').numberToWords
 ## Number to ordinal words
 
 ```js
-require('humanizer.node').numberToWords
+require('humanizer.node')
 
 (0).toOrdinalWords() => "zeroth"
 (1).toOrdinalWords() => "first"
@@ -164,5 +176,50 @@ require('humanizer.node').numberToWords
 (12).toOrdinalWords() => "twelfth"
 (20).toOrdinalWords() => "twentieth"
 (21).toOrdinalWords() => "twenty first"
-(121).toOrdinalWords() => "hundred and twenty first"
+(121).toOrdinalWords() => "hundred and twenty-first"
+```
+
+## Roman Numerals
+
+Humanizer can change numbers to Roman numerals using the `toRoman` extension. The numbers 1 to 10 can be expressed in Roman numerals as follows:
+
+```ts
+(1).toRoman() => "I"
+(2).toRoman() => "II"
+(3).toRoman() => "III"
+(4).toRoman() => "IV"
+(5).toRoman() => "V"
+(6).toRoman() => "VI"
+(7).toRoman() => "VII"
+(8).toRoman() => "VIII"
+(9).toRoman() => "IX"
+(10).toRoman() => "X"
+```
+
+Also the reverse operation using the `fromRoman` extension.
+
+```ts
+"I".fromRoman() => 1
+"II".fromRoman() => 2
+"III".fromRoman() => 3
+"IV".fromRoman() => 4
+"V".fromRoman() => 5
+```
+
+## Metric numerals
+
+Humanizer can change numbers to Metric numerals using the `toMetric` extension. The numbers 1, 1230 and 0.1 can be expressed in Metric numerals as follows:
+
+```js
+(1).toMetric() => "1"
+(1230).toMetric() => "1.23k"
+(0.1).toMetric() => "100m"
+```
+
+Also the reverse operation using the `fromMetric` extension.
+
+```js
+"1".fromMetric() => 1
+"1.23k".fromMetric() => 1230
+"100m".fromMetric() => 0.1
 ```

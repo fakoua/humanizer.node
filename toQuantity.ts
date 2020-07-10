@@ -5,7 +5,7 @@ import './numberToWords'
 
 declare global {
     interface String {
-        toQuantity(quantity: number, showQuantityAs: ShowQuantityAs): string
+        toQuantity(quantity: number, showQuantityAs?: ShowQuantityAs): string
     }
 }
 
@@ -34,15 +34,15 @@ export enum ShowQuantityAs {
  * @returns {string} - The converted value
  */
 String.prototype.toQuantity = function (quantity: number, showQuantityAs: ShowQuantityAs = ShowQuantityAs.Numeric): string {
-    let transformedInput = quantity == 1
-    ? Vocabularies.Default().singularize(this, false)
-    : Vocabularies.Default().pluralize(this, false)
+    const transformedInput = quantity === 1
+    ? Vocabularies.Default().singularize(this as string, false)
+    : Vocabularies.Default().pluralize(this as string, false)
 
-    if (showQuantityAs == ShowQuantityAs.None) {
+    if (showQuantityAs === ShowQuantityAs.None) {
         return transformedInput;
     }
 
-    if (showQuantityAs == ShowQuantityAs.Numeric) {
+    if (showQuantityAs === ShowQuantityAs.Numeric) {
         return `${quantity} ${transformedInput}`
     }
     return `${quantity.toWords()} ${transformedInput}`

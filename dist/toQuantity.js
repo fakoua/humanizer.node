@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShowQuantityAs = void 0;
 // @ts-ignore
 const Vocabularies_1 = require("./src/Humanizer/Inflections/Vocabularies");
 require("./numberToWords");
@@ -29,13 +28,13 @@ var ShowQuantityAs;
  * @returns {string} - The converted value
  */
 String.prototype.toQuantity = function (quantity, showQuantityAs = ShowQuantityAs.Numeric) {
-    let transformedInput = quantity == 1
+    const transformedInput = quantity === 1
         ? Vocabularies_1.Vocabularies.Default().singularize(this, false)
         : Vocabularies_1.Vocabularies.Default().pluralize(this, false);
-    if (showQuantityAs == ShowQuantityAs.None) {
+    if (showQuantityAs === ShowQuantityAs.None) {
         return transformedInput;
     }
-    if (showQuantityAs == ShowQuantityAs.Numeric) {
+    if (showQuantityAs === ShowQuantityAs.Numeric) {
         return `${quantity} ${transformedInput}`;
     }
     return `${quantity.toWords()} ${transformedInput}`;

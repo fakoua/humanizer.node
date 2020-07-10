@@ -1,5 +1,4 @@
-export class EnglishNumberToWordsConverter
-{
+export class EnglishNumberToWordsConverter {
     private static readonly UnitsMap = [ "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen" ];
     private static readonly TensMap = [ "zero", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety" ];
 
@@ -15,145 +14,114 @@ export class EnglishNumberToWordsConverter
         [12, "twelfth"],
     ];
 
-    static convertToOrdinal(number: number): string
-    {
+    static convertToOrdinal(number: number): string {
         return EnglishNumberToWordsConverter.convert(number, true);
     }
 
-    static convert(number: number, isOrdinal: boolean = false): string
-    {
+    static convert(number: number, isOrdinal: boolean = false): string {
         number = Math.floor(number)
-        if (number == 0)
-        {
+        if (number === 0) {
             return EnglishNumberToWordsConverter.getUnitValue(0, isOrdinal);
         }
 
-        if (number < 0)
-        {
+        if (number < 0) {
             return `minus ${EnglishNumberToWordsConverter.convert(-number)}`
         }
 
-        var parts = new Array<string>();
+        const parts = new Array<string>();
 
-        if (Math.floor(number / 1000000000000000000) > 0)
-        {
+        if (Math.floor(number / 1000000000000000000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000000000000000000)} quintillion`)
             number %= 1000000000000000000;
         }
 
-        if (Math.floor(number / 1000000000000000) > 0)
-        {
+        if (Math.floor(number / 1000000000000000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000000000000000)} quadrillion`);
             number %= 1000000000000000;
         }
 
-        if (Math.floor(number / 1000000000000) > 0)
-        {
+        if (Math.floor(number / 1000000000000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000000000000)} trillion`)
             number %= 1000000000000;
         }
 
-        if (Math.floor(number / 1000000000) > 0)
-        {
+        if (Math.floor(number / 1000000000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000000000)} billion`);
             number %= 1000000000;
         }
 
-        if (Math.floor(number / 1000000) > 0)
-        {
+        if (Math.floor(number / 1000000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000000)} million`);
             number %= 1000000;
         }
 
-        if (Math.floor(number / 1000) > 0)
-        {
+        if (Math.floor(number / 1000) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 1000)} thousand`);
             number %= 1000;
         }
 
-        if (Math.floor(number / 100) > 0)
-        {
+        if (Math.floor(number / 100) > 0) {
             parts.push(`${EnglishNumberToWordsConverter.convert(number / 100)} hundred`);
             number %= 100;
         }
 
-        if (Math.floor(number) > 0)
-        {
-            if (parts.length != 0)
-            {
+        if (Math.floor(number) > 0) {
+            if (parts.length !== 0) {
                 parts.push("and");
             }
 
-            if (number < 20)
-            {
+            if (number < 20) {
                 parts.push(EnglishNumberToWordsConverter.getUnitValue(number, isOrdinal));
-            }
-            else
-            {  
-                var lastPart = EnglishNumberToWordsConverter.TensMap[Math.floor(number / 10)];
-                if ((number % 10) > 0)
-                {
+            } else {  
+                let lastPart = EnglishNumberToWordsConverter.TensMap[Math.floor(number / 10)];
+                if ((number % 10) > 0) {
                     lastPart += `-${EnglishNumberToWordsConverter.getUnitValue(number % 10, isOrdinal)}`;
-                }
-                else if (isOrdinal)
-                {
-                    let trimmed = lastPart.replace(/\y+$/g, ''); //lastPart.trimEnd('y')
+                } else if (isOrdinal) {
+                    const trimmed = lastPart.replace(/\y+$/g, ""); // lastPart.trimEnd('y')
                     lastPart = trimmed + "ieth";
                 }
 
                 parts.push(lastPart);
             }
-        }
-        else if (isOrdinal)
-        {
+        } else if (isOrdinal) {
             parts[parts.length - 1] += "th";
         }
 
-        var toWords = parts.join(" ");
+        let toWords = parts.join(" ");
 
-        if (isOrdinal)
-        {
+        if (isOrdinal) {
             toWords = EnglishNumberToWordsConverter.removeOnePrefix(toWords);
         }
 
         return toWords;
     }
 
-    private static getUnitValue(number: number, isOrdinal: boolean): string
-    {
-        if (isOrdinal)
-        {
-            let exceptionString = EnglishNumberToWordsConverter.exceptionNumbersToWords(number)
-            if (exceptionString != "NOTFOUND")
-            {
+    private static getUnitValue(number: number, isOrdinal: boolean): string {
+        if (isOrdinal) {
+            const exceptionString = EnglishNumberToWordsConverter.exceptionNumbersToWords(number)
+            if (exceptionString !== "NOTFOUND") {
                 return exceptionString;
-            }
-            else
-            {
+            } else {
                 return EnglishNumberToWordsConverter.UnitsMap[number] + "th";
             }
-        }
-        else
-        {
+        } else {
             return EnglishNumberToWordsConverter.UnitsMap[number];
         }
     }
 
-    private static removeOnePrefix(toWords: string): string
-    {
+    private static removeOnePrefix(toWords: string): string {
         // one hundred => hundredth
-        if (toWords.indexOf("one") == 0)
-        {
-            toWords = toWords.substring(4); //toWords.remove(0, 4);
+        if (toWords.indexOf("one") === 0) {
+            toWords = toWords.substring(4); // toWords.remove(0, 4);
         }
 
         return toWords;
     }
 
-    private static exceptionNumbersToWords(number: number): string
-    {
+    private static exceptionNumbersToWords(number: number): string {
         let rtnVal = "NOTFOUND";
         EnglishNumberToWordsConverter.OrdinalExceptions.forEach(element => {
+            // tslint:disable-next-line
             if (element[0] == number) {
                 rtnVal = element[1].toString()
             }

@@ -1,13 +1,11 @@
 export const convert = function(nb: number, nbString: string): string {
-    let nMod100 = nb % 100;
+    const nMod100 = nb % 100;
 
-    if (nMod100 >= 11 && nMod100 <= 13)
-    {
+    if (nMod100 >= 11 && nMod100 <= 13) {
         return nbString + "th";
     }
 
-    switch (nb % 10)
-    {
+    switch (nb % 10) {
         case 1:
             return nbString + "st";
 

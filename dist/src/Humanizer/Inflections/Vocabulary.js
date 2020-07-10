@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Vocabulary = void 0;
 /// <summary>
 /// A container for exceptions to simple pluralization/singularization rules.
 /// Vocabularies.Default contains an extensive list of rules for US English.
@@ -17,7 +16,8 @@ class Vocabulary {
     /// </summary>
     /// <param name="singular">The singular form of the irregular word, e.g. "person".</param>
     /// <param name="plural">The plural form of the irregular word, e.g. "people".</param>
-    /// <param name="matchEnding">True to match these words on their own as well as at the end of longer words. False, otherwise.</param>
+    /// <param name="matchEnding">True to match these words on their own as well
+    /// as at the end of longer words. False, otherwise.</param>
     addIrregular(singular, plural, matchEnding = true) {
         if (matchEnding) {
             this.addPlural("(" + singular[0] + ")" + singular.substring(1) + "$", "$1" + plural.substring(1));
@@ -55,16 +55,17 @@ class Vocabulary {
     /// Pluralizes the provided input considering irregular words
     /// </summary>
     /// <param name="word">Word to be pluralized</param>
-    /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words; but if you're unsure call it with false</param>
+    /// <param name="inputIsKnownToBeSingular">Normally you call Pluralize on singular words;
+    /// but if you're unsure call it with false</param>
     /// <returns></returns>
     pluralize(word, inputIsKnownToBeSingular = true) {
-        var result = this.applyRules(this._plurals, word, false);
+        const result = this.applyRules(this._plurals, word, false);
         if (inputIsKnownToBeSingular) {
-            return result !== null && result !== void 0 ? result : word;
+            return (result !== null && result !== void 0 ? result : word);
         }
-        var asSingular = this.applyRules(this._singulars, word, false);
-        var asSingularAsPlural = this.applyRules(this._plurals, asSingular, false);
-        if (asSingular != null && asSingular != word && asSingular + "s" != word && asSingularAsPlural == word && result != word) {
+        const asSingular = this.applyRules(this._singulars, word, false);
+        const asSingularAsPlural = this.applyRules(this._plurals, asSingular, false);
+        if (asSingular !== "" && asSingular !== word && asSingular + "s" !== word && asSingularAsPlural === word && result !== word) {
             return word;
         }
         return result;
@@ -73,33 +74,35 @@ class Vocabulary {
     /// Singularizes the provided input considering irregular words
     /// </summary>
     /// <param name="word">Word to be singularized</param>
-    /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure call it with false</param>
+    /// <param name="inputIsKnownToBePlural">Normally you call Singularize on plural words; but if you're unsure 
+    /// call it with false</param>
     /// <param name="skipSimpleWords">Skip singularizing single words that have an 's' on the end</param>
     /// <returns></returns>
     singularize(word, inputIsKnownToBePlural = true, skipSimpleWords = false) {
-        var result = this.applyRules(this._singulars, word, skipSimpleWords);
+        const result = this.applyRules(this._singulars, word, skipSimpleWords);
         if (inputIsKnownToBePlural) {
-            return result !== null && result !== void 0 ? result : word;
+            return (result !== null && result !== void 0 ? result : word);
         }
         // the Plurality is unknown so we should check all possibilities
-        var asPlural = this.applyRules(this._plurals, word, false);
-        var asPluralAsSingular = this.applyRules(this._singulars, asPlural, false);
-        if (asPlural != word && word + "s" != asPlural && asPluralAsSingular == word && result != word) {
+        const asPlural = this.applyRules(this._plurals, word, false);
+        const asPluralAsSingular = this.applyRules(this._singulars, asPlural, false);
+        if (asPlural !== word && word + "s" !== asPlural && asPluralAsSingular === word && result !== word) {
             return word;
         }
-        return result !== null && result !== void 0 ? result : word;
+        return result === "" ? word : result;
     }
     applyRules(rules, word, skipFirstRule) {
         if (word == null) {
+            // @ts-ignore
             return null;
         }
         if (this.isUncountable(word)) {
             return word;
         }
-        var result = word;
-        var end = skipFirstRule ? 1 : 0;
-        for (var i = rules.length - 1; i >= end; i--) {
-            if ((result = rules[i].apply(word)) != null) {
+        let result = word;
+        const end = skipFirstRule ? 1 : 0;
+        for (let i = rules.length - 1; i >= end; i--) {
+            if ((result = rules[i].apply(word)) !== "") {
                 break;
             }
         }
@@ -112,12 +115,12 @@ class Vocabulary {
 exports.Vocabulary = Vocabulary;
 class Rule {
     constructor(pattern, replacement) {
-        this._regex = new RegExp(pattern, 'i');
+        this._regex = new RegExp(pattern, "i");
         this._replacement = replacement;
     }
     apply(word) {
         if (!this._regex.test(word)) {
-            return null;
+            return "";
         }
         return word.replace(this._regex, this._replacement);
     }
