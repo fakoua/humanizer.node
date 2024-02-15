@@ -1,6 +1,6 @@
 {
   "name": "humanizer.node",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Humanizer meets all your Node needs for manipulating and displaying strings, enums, dates, times, timespans, numbers and quantitie",
   "main": "dist/index.js",
   "runkitExampleFilename": "runkit.js",
